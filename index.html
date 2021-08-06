@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>圖書管理系統</title>
+</head>
+
+<style type="text/css">
+    #body {
+        background-color: #C6D5E6;
+    }
+
+    #newBook {
+        width: 45%;
+        height: 30%;
+        text-align: center;
+        color: #874B43;
+        font-size: 15px;
+        line-height: 25px;
+        background-color: #C2C5C8;
+        float: left;
+    }
+
+    #editBook {
+        display: none;
+        width: 45%;
+        height: 30%;
+        text-align: center;
+        color: #874B43;
+        font-size: 15px;
+        line-height: 25px;
+        background-color: #C2C5C8;
+        float: left;
+
+    }
+
+    #disPlay {
+
+        width: 90%;
+        height: 450px;
+        float: left;
+    }
+
+    #bookList {
+        font-size: 20px;
+        /* overflow:auto; */
+        color: Black;
+        border-style: outset;
+        /* border-color: rgba(102, 89, 89, 0.315); */
+        word-wrap: break-word;
+    }
+
+    .button {
+        border-top: 1px solid #96d1f8;
+        background: #1e7cbb;
+        background: -webkit-gradient(linear, left top, left bottom, from(#5ba14d), to(#0d3a59));
+        background: -moz-linear-gradient(top, #5ba14d, #0d3a59);
+        padding: 4px 8px;
+        -webkit-border-radius: 18px;
+        -moz-border-radius: 18px;
+        border-radius: 18px;
+        -webkit-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+        -moz-box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+        box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+        text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
+        color: white;
+        font-size: 15px;
+        font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+        text-decoration: none;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        border-top-color: #3acfa5;
+        background: #3acfa5;
+        color: #733973;
+    }
+
+    .button:active {
+        border-top-color: #8d99a1;
+        background: #8d99a1;
+    }
+</style>
+
+<body id="body">
+    <div>
+        <div id="newBook" style="border: 3px rgb(19, 94, 52) solid;">
+            <header style="font-size: 25px; color: #A52A2A;">新增書本資料</header>
+            <div>
+                <form id="editForm">
+                    <label for="newBookId">書本流水號：</label>
+                    <input type="text" placeholder="書本流水號" id="newBookId">
+                    <br />
+                    <label for="newBookISBN">ISBN號：</label>
+                    <input type="text" placeholder="書本ISBN" id="newBookISBN">
+                    <br />
+                    <label for="newBookName">書本書名：</label>
+                    <input type="text" placeholder="書本書名" id="newBookName">
+                    <br />
+                    <label for="newBookTypeNum">書本分類號：</label>
+                    <input type="text" placeholder="書本分類號" id="newBookTypeNum">
+                    <br />
+                    <label for="newBookAuthor">書本作者：</label>
+                    <input type="text" placeholder="書本作者" id="newBookAuthor">
+                    <br />
+                    <label for="newBookPublisher">書本出版商：</label>
+                    <input type="text" placeholder="書本出版商" id="newBookPublisher">
+                    <br />
+                    <label for="newBookBirth">書本出版年：</label>
+                    <input type="text" placeholder="書本出版年：" id="newBookBirth">
+                    <br />
+                    <label for="newBookMemo">備註(可為空)</label>
+                    <input type="text" placeholder="書本備註：" id="newBookMemo">
+                    <br />
+                    <button class="button" id="Creat" type="button">新增書本</button>
+                    <button class="button" id="Read" type="button">查詢書本</button>
+                    <button class="button" id="ReadAll" type="button">查詢全部</button>
+                    <br />
+                    <button class="button" id="Update" type="button">編輯書本</button>
+                    <button class="button" id="Delete" type="button">刪除書本</button>
+                    <button class="button" id="Clear" type="reset">清除輸入</button>
+
+                </form>
+            </div>
+        </div>
+
+        <div id="editBook" style="border: 3px rgb(19, 94, 52) solid;">
+            <header style="font-size: 25px; color: #A52A2A;">編輯書本資料</header>
+            <div>
+                <form>
+                    <label for="editBookId">書本流水號：</label>
+                    <input type="text" placeholder="書本流水號" id="editBookId">
+                    <br />
+                    <label for="editBookISBN">ISBN號：</label>
+                    <input type="text" placeholder="書本ISBN" id="editBookISBN">
+                    <br />
+                    <label for="editBookName">書本書名：</label>
+                    <input type="text" placeholder="書本書名" id="editBookName">
+                    <br />
+                    <label for="editBookTypeNum">書本分類號：</label>
+                    <input type="text" placeholder="書本分類號" id="editBookTypeNum">
+                    <br />
+                    <label for="editBookAuthor">書本作者：</label>
+                    <input type="text" placeholder="書本作者" id="editBookAuthor">
+                    <br />
+                    <label for="editBookPublisher">書本出版商：</label>
+                    <input type="text" placeholder="書本出版商" id="editBookPublisher">
+                    <br />
+                    <label for="editBookBirth">書本出版年：</label>
+                    <input type="text" placeholder="書本出版年：" id="editBookBirth">
+                    <br />
+                    <label for="editBookMemo">備註(可為空)</label>
+                    <input type="text" placeholder="書本備註：" id="editBookMemo">
+                    <br />
+                    <button class="button" id="Save" type="button">儲存編輯</button>
+                    <button class="button" id="Cancel" type="button">取消編輯</button>
+                    <br />
+                    <button class="button" id="Clear" type="reset">清除輸入</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="disPlay">
+        <div id="div2" style="max-height:100%;overflow:auto;border:3px rgb(206, 11, 21) solid;">
+            <div id="disPlayBook" style="border:3px rgb(19, 94, 52) solid;"></div>
+        </div>
+    </div>
+    <script src="crud.js"></script>
+
+</body>
+
+</html>
