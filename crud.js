@@ -5,6 +5,7 @@ const { dialog } = require("electron").remote;
 var displayOutput;
 var bookNum;
 var readBookHtml;
+var bookNum;
 
 //抓取檔案路徑&讀取檔案內容
 let pathName = path.join(__dirname, "File");
@@ -27,16 +28,20 @@ newBook.addEventListener("click", function () {
   displayOutput = "";
   document.getElementById("disPlayBook").innerText = displayOutput;
 
+  // document.getElementById("newBookId").innerText = (dataJson.Book.length) + 1;
+  document.getElementById("newBookId").innerHTML = (dataJson.Book.length) + 1;
+  console.log("newBookId的value值:"+document.getElementById("newBookId").value);
+
   var bookId = document.getElementById("newBookId").value;
 
   //新增書本id一定必輸入
-  if (bookId == "") {
-    console.log("bookId:" + bookId);
+  if (document.getElementById("newBookId").value != (dataJson.Book.length) + 1) {
+    document.getElementById("newBookId").value = (dataJson.Book.length) + 1;
     dialog.showMessageBox({
       title: "注意!",
       buttons: ["好"],
       type: "warning",
-      message: "新增書本流水號不可為空!",
+      message: "該本書流水號應該為:" + ((dataJson.Book.length) + 1),
     });
     return false;
   }
@@ -198,7 +203,6 @@ readAllBook.addEventListener("click", function () {
   readBookHtml = "";
 
   for (book of dataJson.Book) {
-    console.log("bookNum:" + bookNum);
     displayOutput =
       "流水號：" +
       book.id +
@@ -429,19 +433,19 @@ saveBook.addEventListener("click", function () {
   }
   console.log(
     "tempIsbn:" +
-      tempIsbn +
-      ",tempName:" +
-      tempName +
-      ",tempType:" +
-      tempType +
-      ",tempAuth:" +
-      tempAuth +
-      ",tempPublisher:" +
-      tempPublisher +
-      ",tempBirth:" +
-      tempBirth +
-      ",tempMemo:" +
-      tempMemo
+    tempIsbn +
+    ",tempName:" +
+    tempName +
+    ",tempType:" +
+    tempType +
+    ",tempAuth:" +
+    tempAuth +
+    ",tempPublisher:" +
+    tempPublisher +
+    ",tempBirth:" +
+    tempBirth +
+    ",tempMemo:" +
+    tempMemo
   );
 
   if (
